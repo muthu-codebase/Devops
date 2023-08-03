@@ -1,0 +1,19 @@
+name: Install Nginx on Self-hosted Runner
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  install-nginx:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Install Nginx
+        run: |
+          chmod +x install_nginx.sh
+          ./install_nginx.sh
