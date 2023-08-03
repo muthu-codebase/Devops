@@ -1,4 +1,4 @@
-## Inputs
+## Inputs:
 Github_token=$1
 current_repo=$2
 PR_number=$3
@@ -8,28 +8,29 @@ echo "$current_repo"
 echo "$PR_number"
 
 
-## Fe-Agents organisation fetching all the repos_name  :
-urlSource_Repo=https://api.github.com/orgs/$Source_org/repos
-repo_list=$(curl -s -H "Authorization: token $Github_token" "$urlSource_Repo" | jq -r '.[] | .name')
+
+## Source org to be fetching the repo
+url=https://api.github.com/orgs/$Source_org/repos
+repos=($(curl -H "Authorization: Bearer $Github_token" "$url" | jq -r '.[] | .name'))
+echo "$repos"
 
 
-## fetching the comments:
-fetch_comment=https://api.github.com/repos/$current_repo/pulls/$PR_number
-repo_name=$(curl -H "Authorization: Bearer $Github_token" "$fetch_comment" | jq -r '.body')
+## current repo comments fetch
+pull_comment=https://api.github.com/repos/$current_repo/pulls/$PR_number
+repo_name=$(curl -H "Authorization: Bearer $Github_token" "$pull_comment" | jq -r '.body')
 echo "$repo_name"
 
 
-# Userinput reponame :
-IFS=':' read -ra repo_name <<< "$repo_name"
-repository_name="${repo_name[1]}"
+IFS=':' read -r -a repo <<< "$repo_name"
+rto="${repo[1]}"
 
-for source_reponame in "${repo_list[@]}";do
-  if [ "$source_reponame" == "$repository_name" ]; then 
+for repo_name in "${repos[@]}";do
+  if [ "$repo_name" == "$rto" ]; then
     flag=1
-    echo "*** Reponame gets matched going to Archive the repo by using the post call ***"
+    echo "***the repo gets matched going to archive the repo using the post call***"
   fi
 done
 
 if [[ "$flag" -eq 0 ]]; then
-  echo "***Please provide the valid Repository name***"
+  echo "the repo not gets matched"
 fi 
