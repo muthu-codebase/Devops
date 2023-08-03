@@ -19,7 +19,7 @@ jobs:
     - run: sudo apt-get update -y
     - run: sudo apt install -y jq
     - run: jq --version
-    - run: pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
+    - run: PULLNUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH") >> $GITHUB_ENV
     - run: chmod +x ./transfer_repo.sh
     - run: ./transfer_repo.sh ${{ env.GIT_TOKEN }} ${{ env.CURRENT_PR_REPO }} ${{ env.PULL_NUMBER }}
       shell: bash
