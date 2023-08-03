@@ -25,9 +25,9 @@ IFS=':' read -r -a repo <<< "$repo_name"
 rto="${repo[1]}"
 echo "$rto"
 
-for repo_name in "${repos[@]}";do
+for repo_name in ${repos[@]};do
     echo "$repo_name"
-  if [ '$repo_name' == '$rto' ]; then
+  if [ "$repo_name" == "$rto" ]; then
     flag=1
     echo "the repo gets matched going to archive the repo using the post call"
   fi
