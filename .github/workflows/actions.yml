@@ -27,5 +27,5 @@ jobs:
     - run: pr_number=${{ github.event.pull_request.number }}
     - run: echo"$pr_number"
     - run: chmod +x ./transfer_repo.sh
-    - run: ./transfer_repo.sh ${{ env.GIT_TOKEN }} ${{ env.CURRENT_PR_REPO }} ${{ env.PR_number }}
+    - run: ./transfer_repo.sh ${{ env.GIT_TOKEN }} ${{ env.CURRENT_PR_REPO }} ${{ env.CURRENT_PR_NUMBER }}
       shell: bash
