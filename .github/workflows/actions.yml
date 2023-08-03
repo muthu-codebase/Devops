@@ -23,5 +23,6 @@ jobs:
     - run: jq --version
     - run: chmod +x ./transfer_repo.sh
     - run: PR_number=${GITHUB_REF#refs/pull/}
-    - run: ./transfer_repo.sh ${{ env.GIT_TOKEN }} ${{ env.CURRENT_PR_REPO }} ${{ PR_number }}
+    - run: echo "Pr:$pr_number"
+    - run: ./transfer_repo.sh ${{ env.GIT_TOKEN }} ${{ env.CURRENT_PR_REPO }} ${{ env.PR_number }}
       shell: bash
