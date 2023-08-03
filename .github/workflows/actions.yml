@@ -9,7 +9,7 @@ on:
 env:
   CURRENT_PR_REPO: "${{ github.repository }}"
   GIT_TOKEN: "${{ github.token }}"
-  
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -19,7 +19,8 @@ jobs:
     - run: sudo apt-get update -y
     - run: sudo apt install -y jq
     - run: jq --version
-    - run: echo "PULL_NUMBER=$(echo "GITHUB_REF#refs/pull/" | awk -F / '{print $1}')" >> $GITHUB_ENV
+    - run: pr_number=${GITHUB_REF#refs/pull/}
+    - run: pr_number=${pr_number%%/head}
     - run: chmod +x ./transfer_repo.sh
     - run: ./transfer_repo.sh ${{ env.GIT_TOKEN }} ${{ env.CURRENT_PR_REPO }} ${{ env.PULL_NUMBER }}
       shell: bash
