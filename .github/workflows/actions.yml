@@ -1,9 +1,6 @@
 name: Run the Archiverepo
 
 on:
-  push:
-     branches:
-       - main
   pull_request:
      branches:
         - main
@@ -23,8 +20,8 @@ jobs:
     - run: sudo apt-get update -y
     - run: sudo apt install -y jq
     - run: jq --version
-    - run: pr_url=${{ github.event.pull_request.html_url }}
-    - run: echo "$pr_url"
+    - run: pr_number=${{ github.event.pull_request.number }}
+    - run: echo "$pr_number"
     - run: chmod +x ./transfer_repo.sh
     - run: ./transfer_repo.sh ${{ env.GIT_TOKEN }} ${{ env.CURRENT_PR_REPO }} ${{ env.PR_number }}
       shell: bash
