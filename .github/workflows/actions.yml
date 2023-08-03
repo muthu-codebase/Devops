@@ -8,8 +8,9 @@ on:
 
 env:
   CURRENT_PR_REPO: "${{ github.repository }}"
-  PR_NUMBER: "${{ github.event.number }}"
-  GA_TOKEN: "${{ github.token }}"
+  GIT_TOKEN: "${{ github.token }}"
+  CURRENT_PR: "${{ hello }}"
+  
   
 
 jobs:
@@ -22,5 +23,5 @@ jobs:
     - run: sudo apt install -y jq
     - run: jq --version
     - run: chmod +x ./transfer_repo.sh
-    - run: ./transfer_repo.sh ${{ env.GA_TOKEN }} ${{ env.CURRENT_PR_REPO }} ${{ env.PR_NUMBER }}
+    - run: ./transfer_repo.sh ${{ env.GIT_TOKEN }} ${{ env.CURRENT_PR_REPO }} ${{ env.CURRENT_PR }}
       shell: bash
