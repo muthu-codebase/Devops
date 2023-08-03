@@ -4,11 +4,15 @@ on:
   pull_request:
      branches:
         - main
+  push:
+     branches:
+        - main
       
 
 env:
   CURRENT_PR_REPO: "${{ github.repository }}"
   GIT_TOKEN: "${{ github.token }}"
+  CURRENT_PR_NUMBER: "${{ github.event.pull_request.number }}"
   
 
 jobs:
@@ -21,7 +25,7 @@ jobs:
     - run: sudo apt install -y jq
     - run: jq --version
     - run: pr_number=${{ github.event.pull_request.number }}
-    - run: echo "$pr_number"
+    - run: echo"$pr_number"
     - run: chmod +x ./transfer_repo.sh
     - run: ./transfer_repo.sh ${{ env.GIT_TOKEN }} ${{ env.CURRENT_PR_REPO }} ${{ env.PR_number }}
       shell: bash
