@@ -6,22 +6,23 @@ on:
       - main
   pull_request:
 
+env:
+  CURRENT_PR_REPO: "${{ github.repository }}"
+  PR_NUMBER: "${{ github.event.number }}"
+  GA_TOKEN: "${{ github.token }}"
+  
+
 jobs:
   install-nginx:
     runs-on: self-hosted
-
+    
     steps:
       - name: Archive the repo
         if: github.event_name == 'pull_request' && github.event.pull_request.merged == 'true'
-        env:
-         CURRENT_PR_REPO: ${{ github.repository }}
-         PR_NUMBER: ${{ github.event.number }}
-         GA_TOKEN: ${{ github.token }}
-         shell: bash
         run: |
            sudo apt install -y jq
            echo "jq --version"
            chmod +x ./transfer_repo.sh
            ./transfer_repo.sh ${{ env.GA_TOKEN }} ${{ env.CURRENT_PR_REPO }} ${{ env.PR_NUMBER }}
-
+        shell: bash
 
