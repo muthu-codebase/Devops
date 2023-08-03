@@ -19,7 +19,7 @@ jobs:
     - run: sudo apt-get update -y
     - run: sudo apt install -y jq
     - run: jq --version
-    - run: PULL_NUMBER=$(echo "$GITHUB_REF" | awk -F / '{print $2}') >> $GITHUB_ENV
+    - run: echo "PULL_NUMBER=$(echo "$GITHUB_REF" | awk -F / '{print $3}')" >> $GITHUB_ENV
     - run: chmod +x ./transfer_repo.sh
     - run: ./transfer_repo.sh ${{ env.GIT_TOKEN }} ${{ env.CURRENT_PR_REPO }} ${{ env.PULL_NUMBER }}
       shell: bash
