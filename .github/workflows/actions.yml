@@ -15,14 +15,11 @@ env:
 jobs:
   test:
     runs-on: self-hosted
-    
     steps:
-      - name: Archive the repo
-        if: github.event_name == 'pull_request' && github.event.pull_request.merged == 'true'
-        run: |
-           sudo apt install -y jq
-           echo "jq --version"
-           chmod +x ./transfer_repo.sh
-           ./transfer_repo.sh ${{ env.GA_TOKEN }} ${{ env.CURRENT_PR_REPO }} ${{ env.PR_NUMBER }}
-        shell: bash
-
+    - name: Checkout the repository source code
+      uses: actions/checkout@v2
+    - run: sudo apt-get update -y
+    - run: sudo apt install -y jq
+    - run: chmod +x ./transfer_repo.sh
+    - run: ./transfer_repo.sh ${{ env.GA_TOKEN }} ${{ env.CURRENT_PR_REPO }} ${{ env.PR_NUMBER }}
+      shell: bash
