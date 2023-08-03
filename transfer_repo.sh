@@ -29,8 +29,11 @@ echo "$repo_name"
 
 
 IFS=':' read -r -a repo <<< "$repo_name"
-rto="${repo[1]}"
-echo "$rto"
+tr="${repo[1]}"
+
+rto=`echo $tr | sed 's/ *$//g'`
+
+echo "$tr"
 
 for repo_name in ${repos[@]};do
     echo "$repo_name"
