@@ -14,7 +14,7 @@ env:
 
 jobs:
   test:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout the repository source code
       uses: actions/checkout@v2
