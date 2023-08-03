@@ -9,6 +9,7 @@ on:
 env:
   CURRENT_PR_REPO: "${{ github.repository }}"
   GIT_TOKEN: "${{ github.token }}"
+  GIT_PR : "${{ github.event.pull_request.number }}"
   
 jobs:
   test:
@@ -21,5 +22,5 @@ jobs:
     - run: jq --version
     - run: echo "PULL_NUMBER=$(echo "$GITHUB_REF" | awk -F / '{print $2}')" >> $GITHUB_ENV
     - run: chmod +x ./transfer_repo.sh
-    - run: ./transfer_repo.sh ${{ env.GIT_TOKEN }} ${{ env.CURRENT_PR_REPO }} ${{ env.PULL_NUMBER }}
+    - run: ./transfer_repo.sh ${{ env.GIT_TOKEN }} ${{ env.CURRENT_PR_REPO }} ${{ env.GIT_PR }}
       shell: bash
