@@ -8,12 +8,19 @@ echo "$current_repo"
 echo "$PR_number"
 
 
-
+repo_list=()
 ## Source org to be fetching the repo
 url=https://api.github.com/orgs/$Source_org/repos
-repos=($(curl -H "Authorization: Bearer $Github_token" "$url" | jq -r '.[] | .name'))
+repos=$(curl -H "Authorization: Bearer $Github_token" "$url" | jq -r '.[] | .name')
 echo "$repos"
 
+for repository in "${repos[@]}";do
+ repo_list+="$repository"
+done
+echo "--------"
+echo ${repo_list[@]}
+
+echo "--------"
 
 ## current repo comments fetch
 pull_comment=https://api.github.com/repos/$current_repo/pulls/$PR_number
