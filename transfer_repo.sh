@@ -29,12 +29,14 @@ echo "$repo_name"
 
 
 IFS=':' read -r -a repo <<< "$repo_name"
-rto="${repo[1]}"
-echo "$rto"
+input_repo="${repo[1]}"
+echo "$input_repo"
+
+user_input_repo=`echo $input_repo | sed 's/ *$//g'`
+echo "$user_input_repo"
 
 for repo_name in ${repos[@]};do
-    echo "$repo_name"
-  if [ "$repo_name" == "$rto" ]; then
+  if [ "$repo_name" == "$user_input_repo" ]; then
     flag=1
     echo "the repo gets matched going to archive the repo using the post call"
   fi
