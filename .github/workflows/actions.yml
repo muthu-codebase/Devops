@@ -1,9 +1,11 @@
 name: Run the Archiverepo
 
 on:
-  pull_request:
-     branches:
-        - main
+ pull_request:
+    types:
+      - closed
+    branches:
+      - main
       
 
 env:
