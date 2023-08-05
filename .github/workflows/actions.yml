@@ -22,7 +22,6 @@ jobs:
     - name: check the pull request gets merged
       run: echo "pull request status:${{github.event.pullrequest.merged}}"
     - name: Checkout the repository source code
-      if: github.event.pull_request.merged == true
       uses: actions/checkout@v2
     - run: sudo apt-get update -y
     - run: sudo apt install -y jq
