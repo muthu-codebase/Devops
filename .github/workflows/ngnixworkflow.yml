@@ -8,7 +8,7 @@ on:
       triggerworkflow:
         description: 'installing the software'
         required: true
-        default: "start" 
+        default: "" 
 
 
 jobs:
