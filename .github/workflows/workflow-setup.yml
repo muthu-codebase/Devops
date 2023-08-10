@@ -13,7 +13,7 @@ on:
 
 jobs:
   install-nginx:
-    runs-on: ubuntu-latest
+    runs-on: scriptlabel
 
     steps:
       - name: setup nginx
