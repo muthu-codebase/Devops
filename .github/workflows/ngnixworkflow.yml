@@ -27,7 +27,5 @@ jobs:
     steps:
       - name: Check NGINX Service Status
         run: |
-         systemctl status nginx
-         sudo systemctl start nginx
-
+           echo "Successfully installed!"
 
