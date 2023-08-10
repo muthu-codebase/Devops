@@ -1,0 +1,30 @@
+name: installation of ngnix 
+
+
+
+on:
+  workflow_dispatch:
+    inputs:
+      triggerworkflow:
+        description: 'installing the software'
+        required: true
+        default: "start" 
+
+
+jobs:
+  install-nginx:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install NGINX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y nginx
+
+  check-nginx-service:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check NGINX Service Status
+        run: |
+          sudo systemctl status nginx
