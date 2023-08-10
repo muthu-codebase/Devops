@@ -1,4 +1,4 @@
-name: installation of ngnix 
+name: installation of nginx 
 
 
 
@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install NGINX
+      - name: setup nginx
         run: |
           sudo apt-get update -y
           sudo apt-get install -y nginx
@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check NGINX Service Status
+      - name: printing the statement 
         run: |
            echo "Successfully installed :${{ github.event.inputs.triggerworkflow }}"
 
