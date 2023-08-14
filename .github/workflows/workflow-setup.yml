@@ -21,7 +21,7 @@ jobs:
            echo "Starting the process :${{ github.event.inputs.triggerworkflow }}"
 
   install-nginx:
-    runs-on: [self-hosted,Linux,script-Execution]
+    runs-on: script-runner
 
     steps:
       - name: setup nginx
