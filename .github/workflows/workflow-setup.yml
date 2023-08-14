@@ -12,20 +12,20 @@ on:
 
 
 jobs:
-  install-nginx:
-    runs-on: self-hosted
-
-    steps:
-      - name: setup nginx
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install -y nginx
-
   check-nginx-service:
     runs-on: ubuntu-latest
 
     steps:
       - name: printing the statement 
         run: |
-           echo "Successfully installed :${{ github.event.inputs.triggerworkflow }}"
+           echo "Starting the process :${{ github.event.inputs.triggerworkflow }}"
+
+  install-nginx:
+    runs-on: [self-hosted,Linux,script-Execution]
+
+    steps:
+      - name: setup nginx
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y nginx
 
