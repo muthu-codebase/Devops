@@ -3,7 +3,7 @@ name: Run the Archiverepo
 on:
  push:
     branches:
-      - main
+      - "**/*"
  pull_request:
     
       
