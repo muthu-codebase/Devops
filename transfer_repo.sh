@@ -12,7 +12,6 @@ repo_list=()
 ## Source org to be fetching the repo
 url=https://api.github.com/orgs/$Source_org/repos
 repos=$(curl -H "Authorization: Bearer $Github_token" "$url" | jq -r '.[] | .name')
-echo "$repos"
 
 for repository in "${repos[@]}";do
  repo_list+="$repository"
@@ -30,7 +29,6 @@ echo "$repo_name"
 
 IFS=':' read -r -a repo <<< "$repo_name"
 input_repo="${repo[1]}"
-echo "$input_repo"
 
 user_input_repo=`echo $input_repo | sed 's/ *$//g'`
 echo "$user_input_repo"
